@@ -1,10 +1,9 @@
-import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-// Update the path below to the correct relative path if needed
 import { icons } from "@/constants/icons";
 import { fetchMovies, fetchMoviesByGenre } from "@/services/api";
 import useFetch from "@/services/useFetch";
-import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useRouter } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { images } from "../../constants/images";
 
 interface MovieCategory {
@@ -22,8 +21,7 @@ const MOVIE_CATEGORIES: MovieCategory[] = [
   { id: 6, name: 'Horror', genreId: 27 },
 ];
 
-export default function Page() {
-
+const Search = () => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryMovies, setCategoryMovies] = useState<{ [key: number]: any[] }>({});
@@ -83,6 +81,7 @@ export default function Page() {
             placeholderTextColor="#999"
             value={searchQuery}
             onChangeText={handleSearch}
+            autoFocus
           />
         </View>
 
@@ -149,8 +148,10 @@ export default function Page() {
         )}
       </ScrollView>
     </View>
-  );
+  )
 }
+
+export default Search
 
 const styles = StyleSheet.create({
   container: {
@@ -158,22 +159,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 24,
     backgroundColor: "black"
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: "white",
-
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
   },
   image: {
     position: 'absolute',
@@ -214,10 +199,6 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 8,
     resizeMode: 'cover',
-  },
-  movie: {
-    marginTop: 10,
-    alignSelf: 'center',
   },
   movieTitle: {
     color: "white",
